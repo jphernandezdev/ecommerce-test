@@ -10,8 +10,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PriceControllerIntegrationTest {
 
-    private final static String baseUrl = "http://localhost:";
-    private final static String apiPath = "/api/v1/prices";
+    private static final String BASE_URL = "http://localhost:";
+    private static final String API_PATH = "/api/v1/prices";
 
     @LocalServerPort
     private Integer port;
@@ -23,7 +23,7 @@ class PriceControllerIntegrationTest {
     void requestProduct35455_Brand1_Date20200614_1000_thenPrice35() {
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=1&productId=35455&applicationDate=2020-06-14T10:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=1&productId=35455&applicationDate=2020-06-14T10:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(200).and()
@@ -43,7 +43,7 @@ class PriceControllerIntegrationTest {
     void requestProduct35455_Brand1_Date20200614_1600_thenPrice25() {
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=1&productId=35455&applicationDate=2020-06-14T16:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=1&productId=35455&applicationDate=2020-06-14T16:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(200).and()
@@ -63,7 +63,7 @@ class PriceControllerIntegrationTest {
     void requestProduct35455_Brand1_Date20200614_2100_thenPrice35() {
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=1&productId=35455&applicationDate=2020-06-14T21:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=1&productId=35455&applicationDate=2020-06-14T21:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(200).and()
@@ -83,7 +83,7 @@ class PriceControllerIntegrationTest {
     void requestProduct35455_Brand1_Date20200615_1000_thenPrice30() {
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=1&productId=35455&applicationDate=2020-06-15T10:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=1&productId=35455&applicationDate=2020-06-15T10:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(200).and()
@@ -103,7 +103,7 @@ class PriceControllerIntegrationTest {
     void requestProduct35455_Brand1_Date20200616_2100_thenPrice38() {
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=1&productId=35455&applicationDate=2020-06-16T21:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=1&productId=35455&applicationDate=2020-06-16T21:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(200).and()
@@ -120,7 +120,7 @@ class PriceControllerIntegrationTest {
     void requestGeneratePriceNotFoundError(){
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath + "?brandId=999&productId=999&applicationDate=2020-06-16T21:00:00")
+                .get(BASE_URL + port + API_PATH + "?brandId=999&productId=999&applicationDate=2020-06-16T21:00:00")
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(404).and()
@@ -132,7 +132,7 @@ class PriceControllerIntegrationTest {
     void requestGenerateGenericError(){
         RestAssured
                 .when()
-                .get(baseUrl + port + apiPath)
+                .get(BASE_URL + port + API_PATH)
                 .then().log().body()
                 .contentType("application/json")
                 .statusCode(500).and()

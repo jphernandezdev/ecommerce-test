@@ -18,7 +18,7 @@ public class PriceInquiryJpaRepositoryAdapter implements PriceInquiryPersistence
     private final PriceEntityMapper priceEntityMapper;
 
     @Override
-    public Optional<Price> getFinalPrice(Long brandId, Long productId, LocalDateTime applicationDate) {
+    public Optional<Price> getFinalPrice(final Long brandId, final Long productId, final LocalDateTime applicationDate) {
         Optional<PriceEntity> price = priceInquiryJpaRepository.getFinalPrice(brandId, productId, applicationDate);
         return price.map(priceEntityMapper::toDomain);
     }

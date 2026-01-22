@@ -38,9 +38,9 @@ public class PriceController {
     @ApiResponse(responseCode = "400", description = "Invalid input parameters for price inquiry", content = @Content(mediaType = "application/json"))
     @ApiResponse(responseCode = "404", description = "No price found for the current input parameters", content = @Content(mediaType = "application/json"))
     public ResponseEntity<PriceResponse> getFinalPrice(
-            @RequestParam Long brandId,
-            @RequestParam Long productId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime applicationDate) {
+            @RequestParam("brandId") Long brandId,
+            @RequestParam("productId") Long productId,
+            @RequestParam("applicationDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime applicationDate) {
         Price price = priceInquiryService.getFinalPrice(brandId, productId, applicationDate);
         return ResponseEntity.ok().body(priceRestMapper.toResponse(price));
     }

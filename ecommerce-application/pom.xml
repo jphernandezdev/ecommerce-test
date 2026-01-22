@@ -10,28 +10,30 @@
     </parent>
 
     <artifactId>ecommerce-application</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
+        <!-- Platform -->
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-domain</artifactId>
             <version>${ecommerce-domain.version}</version>
         </dependency>
+
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <!-- Various -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-            <version>2.0.1</version>
         </dependency>
     </dependencies>
-    
+
 </project>

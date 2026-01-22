@@ -11,7 +11,14 @@ import java.util.Optional;
 @Repository
 public interface PriceInquiryJpaRepository extends JpaRepository<PriceEntity, Long> {
 
-    @Query("SELECT p FROM PriceEntity p where p.brandId = ?1 and p.productId = ?2 and ?3 between p.startDate and p.endDate order by p.priority desc limit 1")
-    Optional<PriceEntity> getFinalPrice(Long brandId, Long productId, LocalDateTime data);
+    @Query("""
+            SELECT p FROM PriceEntity p
+            WHERE
+                p.brandId = :brandId AND
+                p.productId = :productId AND
+                :date BETWEEN p.startDate AND p.endDate
+                ORDER BY p.priority DESC LIMIT 1
+            """)
+    Optional<PriceEntity> getFinalPrice(Long brandId, Long productId, LocalDateTime date);
 
 }

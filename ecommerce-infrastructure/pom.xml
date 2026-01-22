@@ -12,11 +12,14 @@
     <artifactId>ecommerce-infrastructure</artifactId>
 
     <dependencies>
+        <!-- Platform -->
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-domain</artifactId>
             <version>${ecommerce-application.version}</version>
         </dependency>
+        
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -28,12 +31,12 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
         </dependency>
+        
+        <!-- Various -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -42,7 +45,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.2.220</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -50,6 +52,8 @@
             <artifactId>flyway-core</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
+        <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

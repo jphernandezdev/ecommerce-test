@@ -108,7 +108,7 @@ You should see in the console the following log line:
 | http://localhost:8080/swagger-ui.html | Swagger interface based on the OpenAPI auto-generated schema that helps you to test the `prices` resource endpoint. |
 | http://localhost:8080/v3/api-docs     | OpenAPI schema auto-generated from the swagger annotation provided by the `springdoc` dependency.                   |
 | http://localhost:8080/api/v1/prices   | GET http method that will receive three parameters.                                                                 |
-| http://localhost:8080/h2              | H2 Database Console (**URL:** `jdbc:h2:mem:test`, **User:** `sa`, **Password:** `password`)                         |
+| http://localhost:8080/h2-console      | H2 Database Console (**URL:** `jdbc:h2:mem:test`, **User:** `sa`, **Password:** `password`)                         |
 
 ## Testing
 
