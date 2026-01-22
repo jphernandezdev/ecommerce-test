@@ -1,7 +1,9 @@
 package com.ecommerce.bootloader.test.price;
 
 import com.ecommerce.application.price.service.impl.PriceInquiryServiceImpl;
+import com.ecommerce.domain.brand.model.BrandId;
 import com.ecommerce.domain.price.exception.PriceInquiryInvalidParameterException;
+import com.ecommerce.domain.product.model.ProductId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,18 +21,20 @@ class PriceInquiryServiceTest {
 
     @Test
     void testPriceInquiryInvalidParameterException() {
-        LocalDateTime now = LocalDateTime.now();
+        final LocalDateTime now = LocalDateTime.now();
+        final BrandId brandId = new BrandId(1L);
+        final ProductId productId = new ProductId(1L);
         assertThrows(PriceInquiryInvalidParameterException.class, () ->
             priceInquiryService.getFinalPrice(null, null, null)
         );
         assertThrows(PriceInquiryInvalidParameterException.class, () ->
-            priceInquiryService.getFinalPrice(null, 1L, now)
+            priceInquiryService.getFinalPrice(null, productId, now)
         );
         assertThrows(PriceInquiryInvalidParameterException.class, () ->
-            priceInquiryService.getFinalPrice(1L, null, now)
+            priceInquiryService.getFinalPrice(brandId, null, now)
         );
         assertThrows(PriceInquiryInvalidParameterException.class, () ->
-            priceInquiryService.getFinalPrice(1L, 1L, null)
+            priceInquiryService.getFinalPrice(brandId, productId, null)
         );
     }
 

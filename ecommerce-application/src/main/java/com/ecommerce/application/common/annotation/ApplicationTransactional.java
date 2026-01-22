@@ -7,14 +7,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Custom annotation to identify Use Cases in the application layer,
+ * Custom annotation to identify transactions in the application layer,
  * maintaining hexagonal architecture principles by being independent of frameworks.
  */
-@Target({ElementType.TYPE})
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface UseCase {
+public @interface ApplicationTransactional {
+
+    boolean readOnly() default false;
 
     String value() default "";
 
+    String transactionManager() default "";
 }
