@@ -28,14 +28,24 @@ public class PriceInquiryServiceImpl implements PriceInquiryService {
     public Price getFinalPrice(final BrandId brandId, final ProductId productId, final LocalDateTime applicationDate) {
         log.debug("getFinalPrice(brandId={}, productID={}, applicationDate={})", brandId, productId, applicationDate);
 
-        if (applicationDate == null) {
-            throw new PriceInquiryInvalidParameterException("The parameter applicationDate must be specified");
-        }
+        validateParameters(brandId, productId, applicationDate);
 
         return priceInquiryPersistence.getFinalPrice(brandId, productId, applicationDate).orElseThrow(() -> {
             var msg = String.format(NOT_FOUND_ERROR_MSG, brandId.value(), productId.value(), applicationDate);
             return new PriceNotFoundException(msg);
         });
+    }
+
+    private void validateParameters(final BrandId brandId, final ProductId productId, final LocalDateTime applicationDate) {
+        if (brandId == null) {
+            throw new PriceInquiryInvalidParameterException("The parameter brandId must be specified");
+        }
+        if (productId == null) {
+            throw new PriceInquiryInvalidParameterException("The parameter productId must be specified");
+        }
+        if (applicationDate == null) {
+            throw new PriceInquiryInvalidParameterException("The parameter applicationDate must be specified");
+        }
     }
 
 }
