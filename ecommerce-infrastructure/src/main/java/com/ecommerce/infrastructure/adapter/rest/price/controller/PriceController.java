@@ -24,7 +24,7 @@ public class PriceController implements PricesApi {
 
     @Override
     public ResponseEntity<PriceResponseDto> getFinalPrice(Long brandId, Long productId, LocalDateTime applicationDate) {
-        log.info("Received request for final price: brandId={}, productId={}, applicationDate={}", brandId, productId, applicationDate);
+        log.debug("Received request for final price: brandId={}, productId={}, applicationDate={}", brandId, productId, applicationDate);
         Price price = priceInquiryService.getFinalPrice(new BrandId(brandId), new ProductId(productId), applicationDate);
         return ResponseEntity.ok().body(priceRestMapper.toResponseDto(price));
     }
