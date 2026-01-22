@@ -17,6 +17,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>ecommerce-api</module>
         <module>ecommerce-domain</module>
         <module>ecommerce-application</module>
         <module>ecommerce-infrastructure</module>
@@ -27,6 +28,7 @@
         <java.version>21</java.version>
 
         <!-- PLATFORM VERSIONS -->
+        <ecommerce-api.version>1.0.0-SNAPSHOT</ecommerce-api.version>
         <ecommerce-application.version>1.0.0-SNAPSHOT</ecommerce-application.version>
         <ecommerce-domain.version>1.0.0-SNAPSHOT</ecommerce-domain.version>
         <ecommerce-infrastructure.version>1.0.0-SNAPSHOT</ecommerce-infrastructure.version>
@@ -41,6 +43,28 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Platform -->
+            <dependency>
+                <groupId>com.ecommerce</groupId>
+                <artifactId>ecommerce-api</artifactId>
+                <version>${ecommerce-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ecommerce</groupId>
+                <artifactId>ecommerce-domain</artifactId>
+                <version>${ecommerce-domain.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ecommerce</groupId>
+                <artifactId>ecommerce-application</artifactId>
+                <version>${ecommerce-application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ecommerce</groupId>
+                <artifactId>ecommerce-infrastructure</artifactId>
+                <version>${ecommerce-infrastructure.version}</version>
+            </dependency>
+
             <!-- Spring -->
             <dependency>
                 <groupId>org.springdoc</groupId>

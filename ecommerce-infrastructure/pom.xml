@@ -15,8 +15,11 @@
         <!-- Platform -->
         <dependency>
             <groupId>com.ecommerce</groupId>
+            <artifactId>ecommerce-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-domain</artifactId>
-            <version>${ecommerce-application.version}</version>
         </dependency>
         
         <!-- Spring -->

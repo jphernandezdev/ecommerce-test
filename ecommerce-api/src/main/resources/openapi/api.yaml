@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Ecommerce API
+  description: API for ecommerce services
+  version: 1.0.0
+servers:
+  - url: /api/v1
+tags:
+  - name: Prices
+    description: Prices service operations
+paths:
+  /api/v1/prices:
+    get:
+      tags:
+        - Prices
+      summary: Find the final price for the indicated parameters
+      operationId: getFinalPrice
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: applicationDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Price found for current input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponseDto'
+        '400':
+          description: Invalid input parameters for price inquiry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+        '404':
+          description: No price found for the current input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDto'
+components:
+  schemas:
+    PriceResponseDto:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        priceList:
+          type: integer
+          format: int64
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        price:
+          type: number
+          format: double
+    ErrorResponseDto:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
