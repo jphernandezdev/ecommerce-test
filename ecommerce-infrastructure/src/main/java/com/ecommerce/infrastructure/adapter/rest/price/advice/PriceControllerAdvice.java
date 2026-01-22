@@ -1,9 +1,9 @@
 package com.ecommerce.infrastructure.adapter.rest.price.advice;
 
+import com.ecommerce.api.model.ErrorResponseDto;
 import com.ecommerce.domain.common.model.ErrorCatalog;
 import com.ecommerce.domain.price.exception.PriceInquiryInvalidParameterException;
 import com.ecommerce.domain.price.exception.PriceNotFoundException;
-import com.ecommerce.infrastructure.adapter.rest.common.model.response.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -21,37 +21,35 @@ import java.util.Collections;
 public class PriceControllerAdvice {
 
     @ExceptionHandler(PriceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePriceNotFoundException(PriceNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.builder()
+    public ResponseEntity<ErrorResponseDto> handlePriceNotFoundException(PriceNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto()
                 .code(ErrorCatalog.PRICE_NOT_FOUND.getCode())
                 .message(ErrorCatalog.PRICE_NOT_FOUND.getMessage())
                 .details(Collections.singletonList(exception.getMessage()))
-                .timestamp(LocalDateTime.now())
-                .build());
+                .timestamp(LocalDateTime.now()));
     }
 
     @ExceptionHandler(PriceInquiryInvalidParameterException.class)
-    public ResponseEntity<ErrorResponse> handlePriceInvalidParameterException(PriceInquiryInvalidParameterException exception) {
+    public ResponseEntity<ErrorResponseDto> handlePriceInvalidParameterException(PriceInquiryInvalidParameterException exception) {
         return buildBadRequestResponse(exception);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException exception) {
+    public ResponseEntity<ErrorResponseDto> handleMissingServletRequestParameterException(MissingServletRequestParameterException exception) {
         return buildBadRequestResponse(exception);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
+    public ResponseEntity<ErrorResponseDto> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
         return buildBadRequestResponse(exception);
     }
 
-    private ResponseEntity<ErrorResponse> buildBadRequestResponse(Exception exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.builder()
+    private ResponseEntity<ErrorResponseDto> buildBadRequestResponse(Exception exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto()
                 .code(ErrorCatalog.PRICE_INQUIRY_INVALID_PARAMETERS.getCode())
                 .message(ErrorCatalog.PRICE_INQUIRY_INVALID_PARAMETERS.getMessage())
                 .details(Collections.singletonList(exception.getMessage()))
-                .timestamp(LocalDateTime.now())
-                .build());
+                .timestamp(LocalDateTime.now()));
     }
 
 }

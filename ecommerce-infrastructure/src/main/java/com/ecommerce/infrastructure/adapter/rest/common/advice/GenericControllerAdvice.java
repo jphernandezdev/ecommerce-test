@@ -1,7 +1,7 @@
 package com.ecommerce.infrastructure.adapter.rest.common.advice;
 
+import com.ecommerce.api.model.ErrorResponseDto;
 import com.ecommerce.domain.common.model.ErrorCatalog;
-import com.ecommerce.infrastructure.adapter.rest.common.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -16,27 +16,26 @@ import java.util.Collections;
 public class GenericControllerAdvice {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException exception) {
+    public ResponseEntity<ErrorResponseDto> handleMissingServletRequestParameterException(MissingServletRequestParameterException exception) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, ErrorCatalog.INVALID_PARAMETERS, exception);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
+    public ResponseEntity<ErrorResponseDto> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, ErrorCatalog.INVALID_PARAMETERS, exception);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericError(Exception exception) {
+    public ResponseEntity<ErrorResponseDto> handleGenericError(Exception exception) {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCatalog.GENERIC_ERROR, exception);
     }
 
-    private ResponseEntity<ErrorResponse> buildErrorResponse(HttpStatus status, ErrorCatalog error, Exception exception) {
-        ErrorResponse response = ErrorResponse.builder()
+    private ResponseEntity<ErrorResponseDto> buildErrorResponse(HttpStatus status, ErrorCatalog error, Exception exception) {
+        ErrorResponseDto response = new ErrorResponseDto()
                 .code(error.getCode())
                 .message(error.getMessage())
                 .details(Collections.singletonList(exception.getMessage()))
-                .timestamp(LocalDateTime.now())
-                .build();
+                .timestamp(LocalDateTime.now());
         return new ResponseEntity<>(response, status);
     }
 }
