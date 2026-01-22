@@ -1,6 +1,5 @@
-package com.ecommerce.bootloader.test.price;
+package com.ecommerce.application.price.service.impl;
 
-import com.ecommerce.application.price.service.impl.PriceInquiryServiceImpl;
 import com.ecommerce.domain.brand.model.BrandId;
 import com.ecommerce.domain.price.exception.PriceInquiryInvalidParameterException;
 import com.ecommerce.domain.price.exception.PriceNotFoundException;

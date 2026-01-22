@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PriceControllerIntegrationTest {
+class PriceControllerIT {
 
     private static final String BASE_URL = "http://localhost:";
     private static final String API_PATH = "/api/v1/prices";

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-class GenericControllerAdviceTest {
+class GenericControllerAdviceIT {
 
     @LocalServerPort
     private Integer port;
