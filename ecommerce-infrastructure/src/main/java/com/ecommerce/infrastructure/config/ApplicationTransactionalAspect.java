@@ -1,6 +1,7 @@
 package com.ecommerce.infrastructure.config;
 
 import com.ecommerce.application.common.annotation.ApplicationTransactional;
+import com.ecommerce.infrastructure.exception.ApplicationTransactionException;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,10 +25,10 @@ public class ApplicationTransactionalAspect {
         return transactionTemplate.execute(status -> {
             try {
                 return joinPoint.proceed();
-            } catch (RuntimeException e) {
+            } catch (RuntimeException | Error e) {
                 throw e;
             } catch (Throwable e) {
-                throw new RuntimeException(e);
+                throw new ApplicationTransactionException(e);
             }
         });
     }
