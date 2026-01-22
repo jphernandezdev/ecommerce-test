@@ -129,14 +129,26 @@ class PriceControllerIntegrationTest {
     }
 
     @Test
-    void requestGenerateGenericError(){
+    void requestGenerateInvalidParameterError(){
         RestAssured
                 .when()
                 .get(BASE_URL + port + API_PATH)
                 .then().log().body()
                 .contentType("application/json")
-                .statusCode(500).and()
-                .body("code", Matchers.equalTo(ErrorCatalog.GENERIC_ERROR.getCode()))
+                .statusCode(400).and()
+                .body("code", Matchers.equalTo(ErrorCatalog.PRICE_INQUIRY_INVALID_PARAMETERS.getCode()))
+                .extract();
+    }
+
+    @Test
+    void requestGenerateMethodArgumentTypeMismatchError(){
+        RestAssured
+                .when()
+                .get(BASE_URL + port + API_PATH + "?brandId=invalid&productId=35455&applicationDate=2020-06-14T10:00:00")
+                .then().log().body()
+                .contentType("application/json")
+                .statusCode(400).and()
+                .body("code", Matchers.equalTo(ErrorCatalog.PRICE_INQUIRY_INVALID_PARAMETERS.getCode()))
                 .extract();
     }
 

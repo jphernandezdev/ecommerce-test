@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
@@ -17,9 +19,19 @@ class PriceInquiryServiceTest {
 
     @Test
     void testPriceInquiryInvalidParameterException() {
-        assertThrows(PriceInquiryInvalidParameterException.class, () -> {
-            priceInquiryService.getFinalPrice(null, null,null);
-        });
+        LocalDateTime now = LocalDateTime.now();
+        assertThrows(PriceInquiryInvalidParameterException.class, () ->
+            priceInquiryService.getFinalPrice(null, null, null)
+        );
+        assertThrows(PriceInquiryInvalidParameterException.class, () ->
+            priceInquiryService.getFinalPrice(null, 1L, now)
+        );
+        assertThrows(PriceInquiryInvalidParameterException.class, () ->
+            priceInquiryService.getFinalPrice(1L, null, now)
+        );
+        assertThrows(PriceInquiryInvalidParameterException.class, () ->
+            priceInquiryService.getFinalPrice(1L, 1L, null)
+        );
     }
 
 }
