@@ -24,9 +24,9 @@ It was designed to comply with a [**Hexagonal Architecture**](https://en.wikiped
 ## Technology Stack
 
 * **Common**
-    * [Java 17](https://www.oracle.com/java/technologies/downloads/#java17)
+    * [Java 21](https://www.oracle.com/java/technologies/downloads/#java21)
     * [Maven 3.x](https://maven.apache.org/)
-    * [Spring Boot v3](https://spring.io/projects/spring-boot)
+    * [Spring Boot v4](https://spring.io/projects/spring-boot)
     * [Lombok](https://projectlombok.org/): Helper to create builders, setters, getters, etc.
     * [MapStruct](https://mapstruct.org/): Helper to create mappers to pass objects between the different layers.
     * [JaCoCo](https://www.eclemma.org/jacoco/): Used for code coverage reports.
@@ -57,7 +57,7 @@ It was designed to comply with a [**Hexagonal Architecture**](https://en.wikiped
 
 ### Pre-requisites
 
-* Java 17
+* Java 21
 * Maven 3.8.x
 
 ### Step 1 - BUILD
