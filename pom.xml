@@ -27,12 +27,6 @@
     <properties>
         <java.version>21</java.version>
 
-        <!-- PLATFORM VERSIONS -->
-        <ecommerce-api.version>1.0.0-SNAPSHOT</ecommerce-api.version>
-        <ecommerce-application.version>1.0.0-SNAPSHOT</ecommerce-application.version>
-        <ecommerce-domain.version>1.0.0-SNAPSHOT</ecommerce-domain.version>
-        <ecommerce-infrastructure.version>1.0.0-SNAPSHOT</ecommerce-infrastructure.version>
-
         <!-- MANAGED VERSIONS -->
         <springdoc-openapi-starter-webmvc-ui.version>3.0.1</springdoc-openapi-starter-webmvc-ui.version>
         <spring-mock-mvc.version>6.0.0</spring-mock-mvc.version>
@@ -48,22 +42,22 @@
             <dependency>
                 <groupId>com.ecommerce</groupId>
                 <artifactId>ecommerce-api</artifactId>
-                <version>${ecommerce-api.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ecommerce</groupId>
                 <artifactId>ecommerce-domain</artifactId>
-                <version>${ecommerce-domain.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ecommerce</groupId>
                 <artifactId>ecommerce-application</artifactId>
-                <version>${ecommerce-application.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ecommerce</groupId>
                 <artifactId>ecommerce-infrastructure</artifactId>
-                <version>${ecommerce-infrastructure.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- Spring -->

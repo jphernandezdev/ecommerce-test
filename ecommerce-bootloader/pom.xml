@@ -16,17 +16,14 @@
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-application</artifactId>
-            <version>${ecommerce-application.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-domain</artifactId>
-            <version>${ecommerce-domain.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-infrastructure</artifactId>
-            <version>${ecommerce-infrastructure.version}</version>
         </dependency>
         
         <!-- Spring -->

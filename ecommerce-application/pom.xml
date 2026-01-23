@@ -16,7 +16,6 @@
         <dependency>
             <groupId>com.ecommerce</groupId>
             <artifactId>ecommerce-domain</artifactId>
-            <version>${ecommerce-domain.version}</version>
         </dependency>
 
         <!-- Various -->
