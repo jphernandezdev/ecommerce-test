@@ -17,7 +17,8 @@ public interface PriceInquiryJpaRepository extends JpaRepository<PriceEntity, Lo
                 p.brandId = :brandId AND
                 p.productId = :productId AND
                 :date BETWEEN p.startDate AND p.endDate
-                ORDER BY p.priority DESC LIMIT 1
+            ORDER BY p.priority DESC
+            LIMIT 1
             """)
     Optional<PriceEntity> getFinalPrice(Long brandId, Long productId, LocalDateTime date);
 

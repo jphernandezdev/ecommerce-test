@@ -15,7 +15,7 @@ CREATE INDEX IF NOT EXISTS idx_brandId ON prices (brand_id);
 CREATE INDEX IF NOT EXISTS idx_productId ON prices (product_id);
 CREATE INDEX IF NOT EXISTS idx_startDate ON prices (start_date);
 CREATE INDEX IF NOT EXISTS idx_endDate ON prices (end_date);
-CREATE INDEX IF NOT EXISTS idx_brandId_productId_startDate_endDate ON prices (brand_id, product_id, start_date, end_date);
+CREATE INDEX IF NOT EXISTS idx_brandId_productId_startDate_endDate_priority ON prices (brand_id, product_id, start_date, end_date, priority DESC);
 
 INSERT INTO prices(id, brand_id, start_date, end_date, price_list, product_id, priority, price, currency)
 VALUES (1, 1, '2020-06-14 00:00:00', '2020-12-31 23:59:59', 1, 35455, 0, 35.50, 'EUR');
