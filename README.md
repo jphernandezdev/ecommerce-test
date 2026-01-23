@@ -36,6 +36,7 @@ The application exposes a REST service that allows querying the applicable final
 *   **Persistence:** [Spring Data JPA](https://spring.io/projects/spring-data-jpa), [H2 Database](https://www.h2database.com/) (In-memory), [Flyway](https://flywaydb.org/) (Migrations).
 *   **Development Tools:** [Lombok](https://projectlombok.org/), [MapStruct](https://mapstruct.org/).
 *   **Quality and Testing:** [JUnit](https://junit.org/), [Mockito](https://site.mockito.org/), [Rest-Assured](https://rest-assured.io/), [JaCoCo](https://www.eclemma.org/jacoco/).
+*   **AOP:** [AspectJ](https://www.eclipse.org/aspectj/) (via Spring AOP) for decoupling framework concerns.
 
 ---
 
@@ -66,6 +67,14 @@ The business logic is isolated from external factors:
 - **Domain**: Defines business rules.
 - **Ports**: Interfaces that define how the outside world interacts with the domain.
 - **Adapters**: Technical implementations (REST, Database).
+
+#### Framework Decoupling with Custom Annotations
+To maintain the purity of the **Application Layer** and adhere strictly to Hexagonal Architecture, we avoid direct dependencies on Spring Framework annotations (like `@Service` or `@Transactional`) within this layer. Instead, we use custom annotations defined in `ecommerce-application`:
+
+*   **`@UseCase`**: Identifies application services (Use Cases). In the Infrastructure layer (`UseCaseConfig`), these are automatically detected and registered as Spring beans using `@ComponentScan`.
+*   **`@ApplicationTransactional`**: Orchestrates transactions at the application level. Its behavior is implemented in the Infrastructure layer using **AspectJ** (`ApplicationTransactionalAspect`), which intercepts calls and manages transactions through Spring's `PlatformTransactionManager`.
+
+This approach ensures that the business logic remains agnostic of the underlying framework, making it more portable and easier to test in isolation.
 
 ![Architecture Diagram](docs/architecture_diagram.png)
 
