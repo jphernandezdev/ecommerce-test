@@ -7,10 +7,10 @@ This project is an implementation of a REST API for querying final product price
 ## 📑 Table of Contents
 
 - [🚀 Introduction](#-introduction)
-- [🛠️ Technology Stack](#️-technology-stack)
-- [🏗️ Project Structure](#️-project-structure)
+- [🛠️ Technology Stack](#-technology-stack)
+- [🏗️ Project Structure](#-project-structure)
 - [📐 Architecture and Design](#-architecture-and-design)
-- [⚙️ Setup and Execution](#️-setup-and-execution)
+- [⚙️ Setup and Execution](#-setup-and-execution)
 - [🔗 Endpoints and Documentation](#-endpoints-and-documentation)
 - [🧪 Testing and Quality](#-testing-and-quality)
 
@@ -43,20 +43,20 @@ The application exposes a REST service that allows querying the applicable final
 
 The project is modularized to ensure low coupling and high cohesion:
 
-| Module | Responsibility |
-| :--- | :--- |
-| **`ecommerce-api`** | **Contract and DTOs.** Contains the OpenAPI definition (`api.yaml`) and generates controller interfaces. |
-| **`ecommerce-domain`** | **The Heart.** Domain models, Value Objects, and port interfaces. No external dependencies. |
-| **`ecommerce-application`** | **Use Cases.** Implements application logic and orchestrates domain services. |
-| **`ecommerce-infrastructure`** | **Adapters.** Persistence implementations (JPA), REST controllers, and mappers. |
-| **`ecommerce-bootloader`** | **Configuration.** Spring Boot application entry point and global configuration. |
+| Module                         | Responsibility                                                                                           |
+|:-------------------------------|:---------------------------------------------------------------------------------------------------------|
+| **`ecommerce-api`**            | **Contract and DTOs.** Contains the OpenAPI definition (`api.yaml`) and generates controller interfaces. |
+| **`ecommerce-domain`**         | **The Heart.** Domain models, Value Objects, and port interfaces. No external dependencies.              |
+| **`ecommerce-application`**    | **Use Cases.** Implements application logic and orchestrates domain services.                            |
+| **`ecommerce-infrastructure`** | **Adapters.** Persistence implementations (JPA), REST controllers, and mappers.                          |
+| **`ecommerce-bootloader`**     | **Configuration.** Spring Boot application entry point and global configuration.                         |
 
 ---
 
 ## 📐 Architecture and Design
 
 ### API-First Approach
-In this project, the API is a "first-class citizen".
+In this project, the API is a "first-class citizen."
 1.  The contract is defined in `ecommerce-api/src/main/resources/openapi/api.yaml`.
 2.  Using the `openapi-generator-maven-plugin`, controller interfaces and DTOs are automatically generated.
 3.  This ensures that the implementation always stays true to the agreed contract.
@@ -95,11 +95,11 @@ Once compiled, start the service with:
 
 When the application is running, you can access the following resources:
 
-| Resource | URL |
-| :--- | :--- |
-| **Swagger UI** | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |
-| **OpenAPI Docs** | [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs) |
-| **H2 Console** | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
+| Resource         | URL                                                                            |
+|:-----------------|:-------------------------------------------------------------------------------|
+| **Swagger UI**   | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |
+| **OpenAPI Docs** | [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)         |
+| **H2 Console**   | [http://localhost:8080/h2-console](http://localhost:8080/h2-console)           |
 
 **H2 Credentials:**
 - **JDBC URL:** `jdbc:h2:mem:test`
