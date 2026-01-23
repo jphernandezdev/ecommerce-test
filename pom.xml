@@ -16,6 +16,14 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <developers>
+        <developer>
+            <name>jphernandezdev</name>
+            <organization>jphernandezdev</organization>
+            <organizationUrl>https://github.com/jphernandezdev</organizationUrl>
+        </developer>
+    </developers>
+
     <modules>
         <module>ecommerce-api</module>
         <module>ecommerce-domain</module>
