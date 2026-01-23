@@ -1,143 +1,124 @@
-# Technical Test - Ecommerce (Spring Boot)
+# 🛒 Ecommerce Technical Test (Spring Boot)
 
-## Content
+This project is an implementation of a REST API for querying final product prices, designed following the highest software development standards, including **Hexagonal Architecture**, **SOLID** principles, and an **API-First** approach.
 
-- [Overview](#overview)
-- [Technology Stack](#technology-stack)
-- [Application Structure](#application-structure)
-- [Architecture Diagram](#architecture-diagram)
-- [How to build and run](#how-to-build-and-run)
-    - [Pre-requisites](#pre-requisites)
-    - [Step 1 - BUILD](#step-1---build)
-    - [Step 2 - RUN](#step-2---run)
-- [URLs and Endpoints](#urls-and-endpoints)
-- [Testing](#testing)
-    - [How to run test](#how-to-run-test)
-    - [How to generate a coverage report](#how-to-generate-a-coverage-report)
+---
 
-## Overview
+## 📑 Table of Contents
 
-This Spring Boot application exposes a rest service to consult the final price of a product.
+- [🚀 Introduction](#-introduction)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [🏗️ Project Structure](#️-project-structure)
+- [📐 Architecture and Design](#-architecture-and-design)
+- [⚙️ Setup and Execution](#️-setup-and-execution)
+- [🔗 Endpoints and Documentation](#-endpoints-and-documentation)
+- [🧪 Testing and Quality](#-testing-and-quality)
 
-It was designed to comply with a [**Hexagonal Architecture**](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)) and also to comply with [**SOLID principles**](https://en.wikipedia.org/wiki/SOLID).
+---
 
-## Technology Stack
+## 🚀 Introduction
 
-* **Common**
-    * [Java 21](https://www.oracle.com/java/technologies/downloads/#java21)
-    * [Maven 3.x](https://maven.apache.org/)
-    * [Spring Boot v4](https://spring.io/projects/spring-boot)
-    * [Lombok](https://projectlombok.org/): Helper to create builders, setters, getters, etc.
-    * [MapStruct](https://mapstruct.org/): Helper to create mappers to pass objects between the different layers.
-    * [JaCoCo](https://www.eclemma.org/jacoco/): Used for code coverage reports.
-* **Data & Persistence**
-    * [Spring Data JPA](https://spring.io/projects/spring-data-jpa): JPA based repositories implementation.
-    * [Flyway](https://flywaydb.org/): To load database migrations at application startup.
-    * [H2 Database](https://www.h2database.com/): Very fast, open source, JDBC API. Support embedded and server modes;
-      disk-based or in-memory databases
-* **RestAPI**
-    * [springdoc-openapi-ui](https://springdoc.org/): Helps to automate the generation of API documentation using spring boot projects.
-    * [rest-assured](https://rest-assured.io/): REST Assured is a Java DSL for simplifying testing of REST based services.
+The application exposes a REST service that allows querying the applicable final price for a specific product, brand, and date. The business logic manages rate priority when multiple overlapping date ranges exist.
 
-## Application Structure
+### Main Features:
+- **API-First Design**: The API contract is defined first using OpenAPI.
+- **Hexagonal Architecture**: Clear separation between business logic and infrastructure details.
+- **Domain-Driven Design (DDD) Lite**: Use of Value Objects and domain entities to represent business logic.
+- **Technical Excellence**: High test coverage and clean code.
 
-| Module                     | Description                                                                           |
-|----------------------------|---------------------------------------------------------------------------------------|
-| ecommerce-parent           | Module for inheriting common configurations, dependencies, and plugins.               |
-| - ecommerce-application    | Part of the business logic is centralized in this layer.                              |
-| - ecommerce-bootloader     | Module to launch Spring Boot application, run tests and coverage reports.             |
-| - ecommerce-domain         | Here the POJO classes and domain interfaces are centralized.                          |
-| - ecommerce-infrastructure | Adapters such as Rest and access to Persistence (JPA) are centralized in this module. |
+---
 
-## Architecture Diagram
+## 🛠️ Technology Stack
+
+*   **Core:** [Java 21](https://www.oracle.com/java/technologies/downloads/#java21), [Spring Boot 4.x](https://spring.io/projects/spring-boot).
+*   **Dependency Management:** [Maven](https://maven.apache.org/).
+*   **API Documentation:** [OpenAPI 3.0](https://swagger.io/specification/) & [SpringDoc OpenAPI](https://springdoc.org/).
+*   **Persistence:** [Spring Data JPA](https://spring.io/projects/spring-data-jpa), [H2 Database](https://www.h2database.com/) (In-memory), [Flyway](https://flywaydb.org/) (Migrations).
+*   **Development Tools:** [Lombok](https://projectlombok.org/), [MapStruct](https://mapstruct.org/).
+*   **Quality and Testing:** [JUnit](https://junit.org/), [Mockito](https://site.mockito.org/), [Rest-Assured](https://rest-assured.io/), [JaCoCo](https://www.eclemma.org/jacoco/).
+
+---
+
+## 🏗️ Project Structure
+
+The project is modularized to ensure low coupling and high cohesion:
+
+| Module | Responsibility |
+| :--- | :--- |
+| **`ecommerce-api`** | **Contract and DTOs.** Contains the OpenAPI definition (`api.yaml`) and generates controller interfaces. |
+| **`ecommerce-domain`** | **The Heart.** Domain models, Value Objects, and port interfaces. No external dependencies. |
+| **`ecommerce-application`** | **Use Cases.** Implements application logic and orchestrates domain services. |
+| **`ecommerce-infrastructure`** | **Adapters.** Persistence implementations (JPA), REST controllers, and mappers. |
+| **`ecommerce-bootloader`** | **Configuration.** Spring Boot application entry point and global configuration. |
+
+---
+
+## 📐 Architecture and Design
+
+### API-First Approach
+In this project, the API is a "first-class citizen".
+1.  The contract is defined in `ecommerce-api/src/main/resources/openapi/api.yaml`.
+2.  Using the `openapi-generator-maven-plugin`, controller interfaces and DTOs are automatically generated.
+3.  This ensures that the implementation always stays true to the agreed contract.
+
+### Hexagonal Architecture
+The business logic is isolated from external factors:
+- **Domain**: Defines business rules.
+- **Ports**: Interfaces that define how the outside world interacts with the domain.
+- **Adapters**: Technical implementations (REST, Database).
 
 ![Architecture Diagram](docs/architecture_diagram.png)
 
-## How to Build and Run
+---
 
-### Pre-requisites
+## ⚙️ Setup and Execution
 
-* Java 21
-* Maven 3.8.x
+### Prerequisites
+*   Java 21
+*   Maven 3.8+ (or use the included Maven Wrapper)
 
-### Step 1 - BUILD
-
-Go to the project root directory and execute the following command to compile, test, package and install the different
-artifacts in your local maven repository.
-
-```shell
-mvn clean install
-```
-
-Or use the embedded **Maven Wrapper** if you don't have a maven installation.
-
+### 1. Build the Project
+From the project root, run:
 ```shell
 ./mvnw clean install
 ```
 
-### Step 2 - RUN
-
-> **IMPORTANT:** Make sure you do not have any applications running on port `8080` before running this program.
-
-After creating all artifacts you can run the project with the following command:
-
-```shell
-mvn spring-boot:run -pl ecommerce-bootloader
-```
-
-Or use the embedded **Maven Wrapper** if you don't have a maven installation.
-
+### 2. Run the Application
+Once compiled, start the service with:
 ```shell
 ./mvnw spring-boot:run -pl ecommerce-bootloader
 ```
 
-### Step 3 - DONE!
+---
 
-You should see in the console the following log line:
+## 🔗 Endpoints and Documentation
 
-```log
-......
-2024-04-25T01:29:26.228-03:00  INFO 45458 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2024-04-25T01:29:26.234-03:00  INFO 45458 --- [           main] c.e.b.EcommerceSpringBootApplication     : Started EcommerceSpringBootApplication in 1.841 seconds (process running for 1.959)
-```
+When the application is running, you can access the following resources:
 
-## URLs and Endpoints
+| Resource | URL |
+| :--- | :--- |
+| **Swagger UI** | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) |
+| **OpenAPI Docs** | [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs) |
+| **H2 Console** | [http://localhost:8080/h2-console](http://localhost:8080/h2-console) |
 
-| URL                                   | Description                                                                                                         |
-|---------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| http://localhost:8080/swagger-ui.html | Swagger interface based on the OpenAPI auto-generated schema that helps you to test the `prices` resource endpoint. |
-| http://localhost:8080/v3/api-docs     | OpenAPI schema auto-generated from the swagger annotation provided by the `springdoc` dependency.                   |
-| http://localhost:8080/api/v1/prices   | GET http method that will receive three parameters.                                                                 |
-| http://localhost:8080/h2-console      | H2 Database Console (**URL:** `jdbc:h2:mem:test`, **User:** `sa`, **Password:** `password`)                         |
+**H2 Credentials:**
+- **JDBC URL:** `jdbc:h2:mem:test`
+- **User:** `sa`
+- **Password:** `password`
 
-## Testing
+---
 
-### How to run test
+## 🧪 Testing and Quality
 
-```shell
-mvn clean test
-```
-
-Or use the embedded **Maven Wrapper** if you don't have a maven installation.
-
+### Running Tests
+The project includes unit and integration tests:
 ```shell
 ./mvnw clean test
 ```
 
-### How to generate a coverage report
-
-> **Note:** This report will be generated through the **JaCoCo** library
-
-```shell
-mvn clean verify
-```
-
-Or use the embedded **Maven Wrapper** if you don't have a maven installation.
-
+### Coverage Report (JaCoCo)
+To generate the detailed coverage report:
 ```shell
 ./mvnw clean verify
 ```
-
-#### Done!
-
-The code coverage report will be generated in the following path: `ecommerce-bootloader/target/index.html`
+The report will be available at: `ecommerce-bootloader/target/site/jacoco/index.html`
