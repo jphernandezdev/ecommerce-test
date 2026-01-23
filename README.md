@@ -121,4 +121,4 @@ To generate the detailed coverage report:
 ```shell
 ./mvnw clean verify
 ```
-The report will be available at: `ecommerce-bootloader/target/site/jacoco/index.html`
+The report will be available at: `ecommerce-bootloader/target/index.html`
