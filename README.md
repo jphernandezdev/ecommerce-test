@@ -102,7 +102,7 @@ When the application is running, you can access the following resources:
 | **H2 Console**   | [http://localhost:8080/h2-console](http://localhost:8080/h2-console)           |
 
 **H2 Credentials:**
-- **JDBC URL:** `jdbc:h2:mem:test`
+- **JDBC URL:** `jdbc:h2:mem:testdb`
 - **User:** `sa`
 - **Password:** `password`
 
